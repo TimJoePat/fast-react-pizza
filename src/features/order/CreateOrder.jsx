@@ -91,7 +91,14 @@ function CreateOrder() {
             name="cart"
             value={JSON.stringify(cart)}
           />
-          <button disable={isSubmitting}>
+          <button disable={isSubmitting} 
+          className="bg-yellow-400 uppercase font-semibold
+          text-stone-800 px-4 py-4 inline-block
+          tracking-wide rounded-full hover:bg-yellow-300
+          transition-colors selection:duration-300
+          focus:outline-none focus:ring focus:ring-yellow-300
+          focus:bg-yellow-300 focus:ring-offset-2
+          disabled:cursor-not-allowed">
             {isSubmitting ? "Placing order..." : "Order now"}
           </button>
         </div>
@@ -111,7 +118,7 @@ export async function action({ request }) {
     priority: data.priority === "on",
   };
 
-  const newOrder = await createOrder(order);
+  //const newOrder = await createOrder(order);
 
   const errors = {};
   if (!isValidPhone(order.phone))
@@ -119,7 +126,8 @@ export async function action({ request }) {
       "Please give us your correct phone number. We might need it to contact you.";
   if (Object.keys(errors).length > 0) return errors;
   //If everything is Ok, create new order and redirect
-  return redirect(`/order/${newOrder.id}`);
+  //return redirect(`/order/${newOrder.id}`);
+  return null;
 }
 
 export default CreateOrder;
